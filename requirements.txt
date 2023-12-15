@@ -1,0 +1,3 @@
+yagmail
+pyotp
+selenium-recaptcha-solver
