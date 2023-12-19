@@ -50,6 +50,10 @@ def send_email(send_to, subject, contents, send_from_gmail,
 if __name__ == "__main__": 
   parser = argparse.ArgumentParser(
     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+  parser.add_argument("--gmail_id", required=True,
+                      help="send from")
+  parser.add_argument("--gmail_app_password", required=True,
+                      help="Gmail App password")
   parser.add_argument("-s", "--send_to", nargs='+',
       required=True, help="list of receivers")
   parser.add_argument("--subject",
@@ -59,4 +63,6 @@ if __name__ == "__main__":
   parser.add_argument('--interactive', action=argparse.BooleanOptionalAction)
   args = parser.parse_args()
   send_email(send_to=args.send_to, subject=args.subject,
-      contents=args.contents, interactive=args.interactive)
+      contents=args.contents, interactive=args.interactive,
+      send_from_gmail=args.gmail_id,
+      gmail_app_password=args.gmail_app_password)
