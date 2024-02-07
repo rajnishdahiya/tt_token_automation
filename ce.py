@@ -63,7 +63,10 @@ def do_it(args, driver):
   time.sleep(2)
   driver.save_screenshot(args.log_dir/"captca.png")
   email_element = driver.find_element(By.ID, "email")
-  email_element.send_keys(args.gmail_id)
+  if args.tt_login_id is not None:
+    email_element.send_keys(args.tt_login_id)
+  else:
+    email_element.send_keys(args.gmail_id)
   password_element = driver.find_element(By.ID, "password")
   password_element.send_keys(args.password)
   driver.save_screenshot(args.log_dir/"filled.png")

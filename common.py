@@ -31,7 +31,7 @@ def do_it(broker_do_it, args):
   if driver is not None:
     driver.quit()
   send_email(send_to=args.gmail_id, send_from_gmail=args.gmail_id,
-      subject=f"TT {args.client_id} {success}",
+      subject=f"TT {args.client_id} {success} {args.email_tag}",
       contents="check logs", interactive=False,
       gmail_app_password=args.gmail_app_password)
   return success
@@ -49,12 +49,16 @@ def do_common_args_and_do_it(logger_file: str, parser,
   parser.add_argument("--client_id", required=True,
                       help="Broker Client Code e.g. TNR01")
   parser.add_argument("--gmail_id", required=True,
-                      help="Should be same as TT login id")
+                      help="can be same as TT login id")
   parser.add_argument("--gmail_app_password", required=True,
                       help="Gmail App password")
+  parser.add_argument("--tt_login_id", required=False,
+                      help="TT login id if not same as gmail_id")
+  parser.add_argument("--email_tag", required=False,
+                      help="Additional text in email subject")
   parser.add_argument("--sleep_sec", type=int, default=300,
                       help="sleep seconds inbetween retries")
-  parser.add_argument("--retries", type=int, default=3,
+  parser.add_argument("--retries", type=int, default=1,
                       help="number of retries")
   args = parser.parse_args()
   log_format = "[%(asctime)s:%(levelname)8s():%(name)s:%(filename)s" \
