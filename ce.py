@@ -77,7 +77,7 @@ def do_it(args, driver):
   def check_title_and_send_email_on_failure(title: str):
     if str(driver.title) != title:
       email_subject = f"TT CE {args.client_id} {title} failed"
-      send_email(send_to="cserajnishdahiya@gmail.com",
+      send_email(send_to=args.gmail_id,
           subject=email_subject, send_from_gmail=args.gmail_id,
           contents="check logs", interactive=False,
           gmail_app_password=args.gmail_app_password)
